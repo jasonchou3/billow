@@ -14,11 +14,6 @@ class Application extends Container {
         Context.app = this;
     }
 
-    listen() {
-        this.make('http').listen();
-    }
-
-
     get modelPath() {
         return this.project_root_path + '/models';
     }

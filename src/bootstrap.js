@@ -5,11 +5,12 @@ import httpKernel from './http/Kernel'
 (async () => {
     try {
         const app = new Application(__dirname);
-        await app.init();
         app.registerAlias('console', ConsoleKernel);
         app.registerAlias('http', httpKernel);
 
-        app.listen();
+        await app.init();
+
+        app.get('http').listen();
     } catch (e) {
         console.log(e)
     }

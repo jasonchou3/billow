@@ -1,2 +1,7 @@
-export default class $name$Controller {
+import Controller from '../../../libs/framework/controllers/Controller'
+
+export default class $name$Controller extends Controller {
+    handle() {
+
+    }
 }

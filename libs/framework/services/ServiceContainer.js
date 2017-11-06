@@ -17,6 +17,10 @@ export default (Super) => class ServiceContainer extends Super {
         return this.alias_instances[alias];
     }
 
+    hasAlias(alias) {
+        return !!this.config['app']['alias'][alias];
+    }
+
     make(alias, args = []) {
         const clazz = this.config['app']['alias'][alias];
         const instance = new clazz(...args);
