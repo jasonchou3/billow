@@ -8,4 +8,13 @@ export default class UserController extends Controller {
     get(ctx) {
         ctx.body = 'ahaha'
     }
+
+    post(ctx) {
+        ctx.body = 'ahaha'
+    }
+
+
+    index(ctx) {
+        ctx.body = 'index'
+    }
 }

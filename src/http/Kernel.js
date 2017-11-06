@@ -1,4 +1,5 @@
 import HttpKernel from '../../libs/framework/HttpKernel'
+import RouterWrapper from '../../libs/RouterWrapper'
 
 const Koa = require('koa');
 const Router = require('koa-router');
@@ -35,31 +36,7 @@ export default class Kernel extends HttpKernel {
 
 
     getRouter() {
-        return {
-            app: this.app,
-            use() {
-                const argArr = Array.prototype.slice.apply(arguments);
-
-                let controllerPath = argArr[argArr.length - 1];
-                const controllerClazz = require(this.app.controllerPath + '/' + controllerPath).default;
-
-                // ['get', 'post', 'put', 'delete'].map(method => {
-                //
-                // })
-
-                argArr[argArr.length - 1] = async (ctx) => {
-                    const i = new controllerClazz(ctx);
-                    const action = i[ctx.method.toLowerCase()];
-                    if (action) {
-                        await i.handle(ctx);
-                        action(ctx)
-                    }
-                };
-
-                router.all(...argArr);
-            }
-
-        };
+        return new RouterWrapper(this.app.controllerPath,router);
     }
 
     setup() {

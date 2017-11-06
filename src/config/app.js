@@ -4,6 +4,8 @@ import EventProvider from '../providers/EventProvider'
 
 export default {
 
+    debug: true,
+
     providers: [
         AppProvider,
         EventProvider

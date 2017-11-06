@@ -4,6 +4,7 @@ export default class Container {
     project_root_path;
     config = {};
     providers = [];
+    debug = false;
 
     constructor(project_root_path) {
         this.project_root_path = project_root_path;
@@ -18,7 +19,9 @@ export default class Container {
         try {
             readFileFromDir(this.configPath, (key, filename) => {
                 this.config[key] = require(filename).default;
-            })
+            });
+
+            this.debug = this.config['app']['debug'];
         } catch (e) {
             console.log(e)
         }

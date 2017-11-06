@@ -1,3 +1,4 @@
 export default (router) => {
-    router.use('/user', 'UserController')
+    router.use('/user', 'UserController');
+    router.get('/user/index', 'UserController');
 }
