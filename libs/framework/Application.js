@@ -11,7 +11,7 @@ export default class Application extends Container {
     }
 
     listen() {
-
+        this.make('http').listen();
     }
 
 
