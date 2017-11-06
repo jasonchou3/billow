@@ -1,34 +1,24 @@
-import Application from '../libs/framework/Application'
-import Command from '../libs/framework/commands/Command'
-
-class Artisan extends Command {
-    async init() {
-        const app = new Application(__dirname);
-        await app.init();
-        await app.destroy();
-    }
-
-    async handle() {
-        if (process.argv.length === 2) {
-            this.app.commands['help'].handle();
-        } else {
-            const handler_name = process.argv[2];
-
-            let command = this.app.commands[handler_name];
-
-            if (!command) {
-                command = this.app.commands['help'];
-                command.handle(handler_name);
-            } else {
-                const args = process.argv.splice(3, process.argv.length);
-                command.handle(...args)
-            }
-        }
-    }
-}
+import Artisan from '../libs/framework/Artisan'
+import ConsoleKernel from './console/Kernel'
 
 (async () => {
-    const artisan = new Artisan();
-    await artisan.init();
-    await artisan.handle();
+    try {
+
+        const artisan = new Artisan();
+        const app = await artisan.init(__dirname);
+        try {
+            app.registerAlias('console', ConsoleKernel);
+            app.make('console');
+
+            await artisan.handle();
+        } catch (e) {
+            console.log(e)
+        }
+
+
+        await app.destroy();
+    } catch (e) {
+        console.log(e)
+    }
+
 })();

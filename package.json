@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cron-parser": "^2.4.3",
     "koa": "^2.3.0",
     "koa-convert": "^1.2.0",
     "koa-router": "^7.2.1",

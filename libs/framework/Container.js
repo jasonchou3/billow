@@ -67,6 +67,9 @@ export default class Container {
     }
 
 
+    async command(command_name, args = []) {
+        await this.commands[command_name].handle(...args);
+    }
 
     // ==================== service =========================
 
@@ -80,19 +83,28 @@ export default class Container {
     get(alias, args = []) {
         if (!this.alias_instances[alias]) {
 
-            const clazz = this.config['app']['alias'][alias];
-
-            const instance = new clazz(...args);
-
-
-            if (instance.lifecycle === 'app')
-                this.alias_instances[alias] = instance;
-            // else if (instance.lifecycle === 'request')
-            else
-                return instance;
+            return this.make(alias, args);
         }
 
         return this.alias_instances[alias];
+    }
+
+    make(alias, args = []) {
+        const clazz = this.config['app']['alias'][alias];
+        const instance = new clazz(...args);
+
+        if (instance.lifecycle === 'app')
+            this.alias_instances[alias] = instance;
+        // else if (instance.lifecycle === 'request')
+
+        return instance;
+    }
+
+    registerAlias(alias, clazz) {
+        if (this.config['app']['alias'][alias])
+            throw new Error(`alias:${alias}已存在！`)
+
+        this.config['app']['alias'][alias] = clazz;
     }
 }
 
