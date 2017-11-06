@@ -1,0 +1,13 @@
+import Command from '../../libs/framework/commands/Command'
+
+export default class $name$Command extends Command {
+    name = '$key$';
+
+    handle(name) {
+
+    }
+
+    desc() {
+        return '默认描述'
+    }
+}

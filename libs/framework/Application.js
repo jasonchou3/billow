@@ -22,4 +22,8 @@ export default class Application extends Container {
     get commandPath() {
         return this.project_root_path + '/commands';
     }
+
+    get controllerPath() {
+        return this.project_root_path + '/http/controllers';
+    }
 }

@@ -4,10 +4,14 @@ import {replaceAll} from '../../libs/js-extensions'
 
 export default class MakeFromTemplateCommand extends Command {
 
-    async copy(template_path, to_path, name, postfix) {
+    async copy(template_path, to_path, name, postfix, variables = {}) {
         try {
-            const temp = await fs.readFile(template_path);
-            let content = replaceAll(temp, this.wrapVariable('name'), name);
+            let content = await fs.readFile(template_path);
+
+            for (const v in variables) {
+                content = replaceAll(content, this.wrapVariable(v), variables[v]);
+            }
+
             await fs.writeFile(to_path + '/' + name + '.' + postfix, content);
         } catch (e) {
             console.log(e)

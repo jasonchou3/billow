@@ -1,13 +1,17 @@
 import Provider from './Provider'
 import HelperCommand from '../commands/HelpCommand'
 import MakeModelCommand from '../commands/make/MakeModelCommand'
+import MakeControllerCommand from '../commands/make/MakeControllerCommand'
+import MakeCommandCommand from '../commands/make/MakeCommandCommand'
 
 export default class CommandProvider extends Provider {
 
     commands = [];
     _commands = [
         HelperCommand,
-        MakeModelCommand
+        MakeModelCommand,
+        MakeCommandCommand,
+        MakeControllerCommand
     ];
 
     init() {

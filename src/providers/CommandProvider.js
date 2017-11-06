@@ -1,8 +1,8 @@
 import Provider from '../../libs/framework/providers/CommandProvider'
-import PushUserMsgCommand from '../commands/PushUserMsgCommand'
+import ExampleCommand from '../commands/ExampleCommand'
 
 export default class CommandProvider extends Provider {
     commands = [
-        PushUserMsgCommand
+        ExampleCommand
     ];
 }
