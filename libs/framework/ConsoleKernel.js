@@ -3,6 +3,7 @@ import HelperCommand from './commands/HelpCommand'
 import MakeModelCommand from './commands/make/MakeModelCommand'
 import MakeControllerCommand from './commands/make/MakeControllerCommand'
 import MakeCommandCommand from './commands/make/MakeCommandCommand'
+import MakeListenerCommand from './commands/make/MakeListenerCommand'
 import ScheduleCommand from './commands/ScheduleCommand_'
 
 export default class ConsoleKernel extends Service {
@@ -14,6 +15,7 @@ export default class ConsoleKernel extends Service {
         MakeModelCommand,
         MakeCommandCommand,
         MakeControllerCommand,
+        MakeListenerCommand,
         ScheduleCommand
     ];
 
@@ -26,7 +28,7 @@ export default class ConsoleKernel extends Service {
         })
     }
 
-    async command(name, args) {
-        await this.app.command(name, args)
+    async command_handle(name, args) {
+        await this.app.command_handle(name, args)
     }
 }

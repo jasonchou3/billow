@@ -1,0 +1,7 @@
+import Listener from '../../libs/framework/listeners/Listener'
+
+export default class $name$Listener extends Listener {
+    handle(name, args) {
+        console.log(name, args)
+    }
+}
