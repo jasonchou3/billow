@@ -13,7 +13,7 @@ export default class AppProvider extends Provider {
         //路由
 
         if (this.app.hasAlias('http')) {
-            routes(this.app.get('http').getRouter());
+            routes(this.app.get('http').router);
             this.app.get('http').setup();
         }
     }

@@ -1,14 +1,18 @@
-export default class RouterWrapper {
-    constructor(controllerRootPath, router) {
-        this.controllerRootPath = controllerRootPath;
-        this.router = router;
+import Context from '../Context'
+
+const Router = require('koa-router');
+
+export default class KoaRouterWrapper extends Context {
+    constructor(router) {
+        super();
+        this.router = new Router();
     }
 
     use() {
         const argArr = Array.prototype.slice.apply(arguments);
 
         let controllerPath = argArr[argArr.length - 1];
-        const controllerClazz = require(this.controllerRootPath + '/' + controllerPath).default;
+        const controllerClazz = require(this.app.controllerPath + '/' + controllerPath).default;
 
         ['get', 'post', 'put', 'delete'].map(method => {
             if (controllerClazz.prototype[method]) {
@@ -45,9 +49,6 @@ export default class RouterWrapper {
 
         let controllerAndAction = argArr[argArr.length - 1];
 
-
-        console.log(method, ...argArr);
-
         let temp = controllerAndAction.split('@');
 
         let controllerPath = temp[0];
@@ -58,15 +59,21 @@ export default class RouterWrapper {
             action = method;
         }
 
-        const controllerClazz = require(this.controllerRootPath + '/' + controllerPath).default;
+        const controllerClazz = require(this.app.controllerPath + '/' + controllerPath).default;
 
-        argArr[argArr.length - 1] = async (ctx) => {
-            const i = new controllerClazz(ctx);
-            await i.handle(ctx);
-            await i[action](ctx);
-        };
+        if (controllerClazz.prototype[action]) {
+            if (this.app.debug)
+                console.log(method, ...argArr);
 
+            argArr[argArr.length - 1] = async (ctx) => {
+                const i = new controllerClazz(ctx);
+                await i.handle(ctx);
+                await i[action](ctx);
+            };
 
-        this.router[method](...argArr);
+            this.router[method](...argArr);
+        } else {
+            throw new Error(`action:${action} 不存在! ${method} ${argArr}`,)
+        }
     }
 }

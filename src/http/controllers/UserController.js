@@ -5,9 +5,9 @@ export default class UserController extends Controller {
 
     }
 
-    get(ctx) {
-        ctx.body = 'ahaha'
-    }
+    // get(ctx) {
+    //     ctx.body = 'ahaha'
+    // }
 
     post(ctx) {
         ctx.body = 'ahaha'
@@ -15,6 +15,10 @@ export default class UserController extends Controller {
 
 
     index(ctx) {
+
+        throw new Error(14211)
+
+        this.app.event_fire('example-event');
         ctx.body = 'index'
     }
 }

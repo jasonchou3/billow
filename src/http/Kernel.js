@@ -1,10 +1,7 @@
 import HttpKernel from '../../libs/framework/HttpKernel'
-import RouterWrapper from '../../libs/RouterWrapper'
+import KoaRouterWrapper from '../../libs/framework/libs/KoaRouterWrapper'
 
 const Koa = require('koa');
-const Router = require('koa-router');
-const router = new Router();
-
 const favicon = require('koa-favicon')();
 const convert = require('koa-convert');
 const bodyparser = require('koa-bodyparser')();
@@ -24,24 +21,46 @@ export default class Kernel extends HttpKernel {
             logger
         ];
 
+        this.http.use(async (ctx, next) => {
+            try {
+                console.log(1);
+                await next();
+                await this.onNotFound(ctx);
+            } catch (e) {
+                await this.onError(ctx, e);
+            }
+        });
+
         this.http.use(convert.compose(middlewares));
-        // this.http.use((ctx) => {
-        //     ctx.body = 'hello, jaravel';
-        // });
+        this.router = new KoaRouterWrapper();
     }
+
+    async onNotFound(ctx) {
+        if (!ctx.body)
+            ctx.body = {code: 404, msg: 'not found'};
+    }
+
+    async onError(ctx, e) {
+
+        const res = {code: 500, msg: '系统异常'};
+
+        if (this.app.debug) {
+            res.debug = true;
+            res.msg = e.message;
+            res.stack = e.stack;
+        }
+
+        ctx.body = res;
+    }
+
 
     onListen() {
         this.http.listen(this.config.port);
     }
 
-
-    getRouter() {
-        return new RouterWrapper(this.app.controllerPath,router);
-    }
-
     setup() {
-        this.http.use(router.routes());
-        this.http.use(router.allowedMethods());
+        this.http.use(this.router.router.routes());
+        this.http.use(this.router.router.allowedMethods());
     }
 }
 

@@ -16,15 +16,11 @@ export default class Container {
     }
 
     async initConfig() {
-        try {
-            readFileFromDir(this.configPath, (key, filename) => {
-                this.config[key] = require(filename).default;
-            });
+        readFileFromDir(this.configPath, (key, filename) => {
+            this.config[key] = require(filename).default;
+        });
 
-            this.debug = this.config['app']['debug'];
-        } catch (e) {
-            console.log(e)
-        }
+        this.debug = this.config['app']['debug'];
     }
 
     get configPath() {
@@ -32,21 +28,17 @@ export default class Container {
     }
 
     async initProviders() {
-        try {
-            this.config['app']['providers'].map(provider_clazz => {
-                const provider = new provider_clazz();
-                this.providers.push(provider);
+        this.config['app']['providers'].map(provider_clazz => {
+            const provider = new provider_clazz();
+            this.providers.push(provider);
 
-                provider.init();
-            });
+            provider.init();
+        });
 
-            this.providers.map(provider => {
-                provider.boot();
-            })
+        this.providers.map(provider => {
+            provider.boot();
+        })
 
-        } catch (e) {
-            console.log(e)
-        }
     }
 
     destroy() {
