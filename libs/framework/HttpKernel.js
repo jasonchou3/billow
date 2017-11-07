@@ -1,7 +1,9 @@
 import Service from './services/Service'
 import Router from './libs/KoaRouterWrapper'
 
+const https = require('https');
 const Koa = require('koa');
+const fs = require('fs');
 
 export default class HttpKernel extends Service {
     config_key = 'http';
@@ -25,9 +27,21 @@ export default class HttpKernel extends Service {
     }
 
 
-    listen() {
-        this.http.listen(this.config.port);
-        console.log('listening on: http://localhost:' + this.config.port)
+    async listen() {
+        const cb = (err) => {
+            console.log('\nlistening on: http://localhost:' + this.config.port)
+        };
+
+
+        if (this.config.https) {
+            const credentials = {
+                key: fs.readFileSync(this.config.credentials.key, 'utf8'),
+                cert: fs.readFileSync(this.config.credentials.cert, 'utf8')
+            };
+
+            https.createServer(credentials, this.http.callback()).listen(this.config.port, cb);
+        } else
+            this.http.listen(this.config.port, cb);
     }
 
 
@@ -45,6 +59,5 @@ export default class HttpKernel extends Service {
         this.http.use(router.router.routes());
         this.http.use(router.router.allowedMethods());
     }
-
 }
 
