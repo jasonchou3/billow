@@ -27,8 +27,7 @@ export default class Kernel extends HttpKernel {
                 await next();
                 await this.onNotFound(ctx);
             } catch (e) {
-                // await this.onError(ctx, e);
-                throw e
+                await this.onError(ctx, e);
             }
         });
 
