@@ -1,11 +1,16 @@
-开发：
-npm run dev
+#开发：
 
-计划任务：
-* */1 * * * * babel-node src/artisan schedule:run
+    npm run dev
 
-发布：
-npm run build
+####任务调度：
+利用cron实现任务调度
 
-计划任务：
-* */1 * * * * node dist/artisan schedule:run
+    * */1 * * * * babel-node src/artisan schedule:run
+
+#发布：
+
+    npm run build
+
+####计划任务：
+        
+    * */1 * * * * node dist/artisan schedule:run
