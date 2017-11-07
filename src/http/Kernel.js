@@ -27,7 +27,8 @@ export default class Kernel extends HttpKernel {
                 await next();
                 await this.onNotFound(ctx);
             } catch (e) {
-                await this.onError(ctx, e);
+                // await this.onError(ctx, e);
+                throw e
             }
         });
 
@@ -37,12 +38,12 @@ export default class Kernel extends HttpKernel {
 
     async onNotFound(ctx) {
         if (!ctx.body)
-            ctx.body = {code: 404, msg: 'not found'};
+            ctx.body = {code: 404, msg: 'Not Found'};
     }
 
     async onError(ctx, e) {
 
-        const res = {code: 500, msg: '系统异常'};
+        const res = {code: 500, msg: 'Internal Server Error'};
 
         if (this.app.debug) {
             res.debug = true;
