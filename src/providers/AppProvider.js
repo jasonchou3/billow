@@ -1,5 +1,4 @@
 import Provider from '../../libs/framework/providers/Provider'
-import routes from '../http/routes'
 
 export default class AppProvider extends Provider {
 
@@ -13,8 +12,7 @@ export default class AppProvider extends Provider {
         //路由
 
         if (this.app.hasAlias('http')) {
-            routes(this.app.get('http').router);
-            this.app.get('http').setup();
+            this.app.make('http');
         }
     }
 

@@ -3,9 +3,9 @@ import Context from '../Context'
 const Router = require('koa-router');
 
 export default class KoaRouterWrapper extends Context {
-    constructor(router) {
+    constructor(opts) {
         super();
-        this.router = new Router();
+        this.router = new Router(opts);
     }
 
     use() {
