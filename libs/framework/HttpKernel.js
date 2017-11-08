@@ -29,9 +29,8 @@ export default class HttpKernel extends Service {
 
     async listen() {
         const cb = (err) => {
-            console.log('\nlistening on: http://localhost:' + this.config.port)
+            console.log(`\nlistening on: ${this.config.https ? 'https' : 'http'}://localhost:${ this.config.port}`)
         };
-
 
         if (this.config.https) {
             const credentials = {
@@ -51,7 +50,7 @@ export default class HttpKernel extends Service {
             name = prefix;
 
         router.router.use(async (ctx, next) => {
-            ctx['router_type'] = name;
+            ctx['router_name'] = name;
             await next()
         });
 

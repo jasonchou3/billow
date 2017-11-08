@@ -34,9 +34,9 @@ export default class Kernel extends HttpKernel {
 
         if (this.app.debug) {
             res.debug = true;
-            res.router_type = ctx.router_type;
+            res.router_name = ctx.router_name;
             res.msg = e.message;
-            res.stack = e.stack;
+            res.stack = e.stack.split('\n');
         }
 
         ctx.body = res;

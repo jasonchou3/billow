@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "colors": "^1.1.2",
     "cron-parser": "^2.4.3",
     "koa": "^2.3.0",
@@ -19,7 +20,8 @@
     "koa-favicon": "^2.0.0",
     "koa-logger": "^3.1.0",
     "koa-router": "^7.2.1",
-    "mongoose": "^4.13.0"
+    "mongoose": "^4.13.0",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

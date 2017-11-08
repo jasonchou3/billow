@@ -14,11 +14,11 @@ export default class UserController extends Controller {
     }
 
 
-    index(ctx) {
+    async index(ctx) {
 
-        throw new Error(14211)
-
-        this.app.event_fire('example-event');
+        // throw new Error(14211)
+        await this.app.get('redis').getClient().setAsync('name', 'zw');
+        this.app.event_fire('example-event', 1, 2, 2, 2);
         ctx.body = 'index'
     }
 }
