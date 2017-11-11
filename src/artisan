@@ -1,20 +1,17 @@
 import Artisan from '../libs/framework/Artisan'
-import ConsoleKernel from './console/Kernel'
 
 (async () => {
     try {
 
         const artisan = new Artisan();
-        const app = await artisan.init(__dirname);
+        const app = await artisan.init(__dirname, 'console');
         try {
-            app.registerAlias('console', ConsoleKernel);
             app.make('console');
 
             await artisan.handle();
         } catch (e) {
             console.log(e)
         }
-
 
         await app.destroy();
     } catch (e) {

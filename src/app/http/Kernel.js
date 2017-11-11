@@ -3,10 +3,10 @@ const convert = require('koa-convert');
 const bodyparser = require('koa-bodyparser')();
 const logger = require('koa-logger')();
 
-import HttpKernel from '../../libs/framework/HttpKernel'
+import HttpKernel from '../../../libs/framework/HttpKernel'
 
-import api_routes from './api_routes'
-import web_routes from './web_routes'
+import api_routes from './routes/api'
+import web_routes from './routes/web'
 
 export default class Kernel extends HttpKernel {
 
@@ -36,7 +36,7 @@ export default class Kernel extends HttpKernel {
             res.debug = true;
             res.router_name = ctx.router_name;
             res.msg = e.message;
-            res.stack = e.stack.split('\n');
+            res.stack = e.stackList()
         }
 
         ctx.body = res;

@@ -1,11 +1,11 @@
-import Service from './services/Service'
+import Kernel from './Kernel'
 import Router from './libs/KoaRouterWrapper'
 
 const https = require('https');
 const Koa = require('koa');
 const fs = require('fs');
 
-export default class HttpKernel extends Service {
+export default class HttpKernel extends Kernel {
     config_key = 'http';
     lifecycle = 'app';
 

@@ -1,12 +1,13 @@
-import Service from './services/Service'
+import Kernel from './Kernel'
 import HelperCommand from './commands/HelpCommand'
 import MakeModelCommand from './commands/make/MakeModelCommand'
 import MakeControllerCommand from './commands/make/MakeControllerCommand'
 import MakeCommandCommand from './commands/make/MakeCommandCommand'
 import MakeListenerCommand from './commands/make/MakeListenerCommand'
 import ScheduleCommand from './commands/ScheduleCommand_'
+import QueueCommand from './jobs/QueueCommand'
 
-export default class ConsoleKernel extends Service {
+export default class ConsoleKernel extends Kernel {
     lifecycle = 'app';
 
     commands = [];
@@ -16,7 +17,8 @@ export default class ConsoleKernel extends Service {
         MakeCommandCommand,
         MakeControllerCommand,
         MakeListenerCommand,
-        ScheduleCommand
+        ScheduleCommand,
+        QueueCommand
     ];
 
     constructor() {
@@ -29,5 +31,13 @@ export default class ConsoleKernel extends Service {
 
     commandHandle(name, args) {
         return this.app.commandHandle(name, args)
+    }
+
+    schedule(scheduler) {
+
+    }
+
+    async onError(e) {
+
     }
 }

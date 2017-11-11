@@ -9,36 +9,30 @@ export default class KoaRouterWrapper extends Context {
     }
 
     use() {
-        const argArr = Array.prototype.slice.apply(arguments);
-
-        let controllerPath = argArr[argArr.length - 1];
+        let controllerPath = arguments[arguments.length - 1];
         const controllerClazz = require(this.app.controllerPath + '/' + controllerPath).default;
 
         ['get', 'post', 'put', 'delete'].map(method => {
             if (controllerClazz.prototype[method]) {
-                this[method](...argArr);
+                this[method](...arguments);
             }
         });
     }
 
     get() {
-        const argArr = Array.prototype.slice.apply(arguments);
-        this.add('get', ...argArr);
+        this.add('get', ...arguments);
     }
 
     post() {
-        const argArr = Array.prototype.slice.apply(arguments);
-        this.add('post', ...argArr);
+        this.add('post', ...arguments);
     }
 
     put() {
-        const argArr = Array.prototype.slice.apply(arguments);
-        this.add('put', ...argArr);
+        this.add('put', ...arguments);
     }
 
     delete() {
-        const argArr = Array.prototype.slice.apply(arguments);
-        this.add('put', ...argArr);
+        this.add('put', ...arguments);
     }
 
     add() {

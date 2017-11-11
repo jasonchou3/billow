@@ -16,6 +16,6 @@ export default (Super) => class CommandContainer extends Super {
     }
 
     get commandPath() {
-        return this.project_root_path + '/commandClasses';
+        return this.appPath + '/console/commands';
     }
 }

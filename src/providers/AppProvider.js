@@ -11,7 +11,7 @@ export default class AppProvider extends Provider {
     boot() {
         //路由
 
-        if (this.app.hasAlias('http')) {
+        if (this.app.isHttpMode()) {
             this.app.make('http');
         }
     }
@@ -19,5 +19,9 @@ export default class AppProvider extends Provider {
 
     destroy() {
         this.app.get('db').destroy();
+
+        if (this.app.has('redis')) {
+            this.app.get('redis').destroy();
+        }
     }
 }

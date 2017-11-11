@@ -4,7 +4,7 @@ export default (Super) => class ServiceContainer extends Super {
     alias_instances = {};
 
     /**
-     *
+     * 不存在创建，存在返回服务对象
      * @param alias
      * @param args array
      */
@@ -14,6 +14,15 @@ export default (Super) => class ServiceContainer extends Super {
             return this.make(alias, args);
         }
 
+        return this.alias_instances[alias];
+    }
+
+    /**
+     * 是否存在服务对象
+     * @param alias
+     * @returns {*}
+     */
+    has(alias) {
         return this.alias_instances[alias];
     }
 

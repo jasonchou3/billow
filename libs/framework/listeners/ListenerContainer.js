@@ -22,6 +22,6 @@ export default (Super) => class ListenerContainer extends Super {
     }
 
     get listenerPath() {
-        return this.project_root_path + '/listeners';
+        return this.appPath + '/listeners';
     }
 }

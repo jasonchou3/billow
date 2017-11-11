@@ -22,7 +22,7 @@ export default class Artisan extends Command {
                 this.app.commandHandle('help', [handler_name])
             } else {
                 const args = process.argv.splice(3, process.argv.length);
-                this.app.commandHandle(handler_name, args)
+                await this.app.commandHandle(handler_name, args)
             }
         }
     }

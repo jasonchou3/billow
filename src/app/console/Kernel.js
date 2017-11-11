@@ -1,4 +1,4 @@
-import ConsoleKernel from '../../libs/framework/ConsoleKernel'
+import ConsoleKernel from '../../../libs/framework/ConsoleKernel'
 import ExampleCommand from './commands/ExampleCommand'
 
 export default class Kernel extends ConsoleKernel {
@@ -10,5 +10,9 @@ export default class Kernel extends ConsoleKernel {
         scheduler.run('*/30 * * * * *', async () => {
             await this.commandHandle('help');
         })
+    }
+
+    async onError(e) {
+
     }
 }

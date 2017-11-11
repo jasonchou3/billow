@@ -1,16 +1,37 @@
 import Command from './Command'
-import scheduler from '../scheduler'
 
+const parser = require('cron-parser');
 
 export default class ScheduleCommand extends Command {
     static key = 'schedule:run';
     static desc = '执行计划任务';
 
-    handle(name) {
-
+    async handle(name) {
         const kernel = this.app.get('console');
+        try {
+            kernel.schedule(this);
+        } catch (e) {
+            await kernel.onError(e)
+        }
+    }
 
-        kernel.schedule(scheduler);
+    async run(date, cb) {
+
+        const nowDate = new Date();
+        const options = {
+            currentDate: nowDate,
+        };
+
+
+        const interval = parser.parseExpression(date, options);
+        const nextDate = interval.next();
+
+
+        const d = nextDate.getTime() - nowDate.valueOf();
+
+        if (d < 60 * 1000) { //1分钟以内
+            await cb();
+        }
     }
 
 }

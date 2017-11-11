@@ -1,3 +1,3 @@
-global.require_ = (path) => {
-    return require(path).default;
+Error.prototype.stackList = function () {
+    return this.stack.split('\n');
 };
