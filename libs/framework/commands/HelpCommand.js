@@ -2,7 +2,7 @@ import Command from './Command'
 
 
 export default class HelpCommand extends Command {
-    name = 'help';
+    static key = 'help';
 
     handle(name) {
         require('colors');
@@ -10,8 +10,8 @@ export default class HelpCommand extends Command {
         this.printError(name);
 
         console.log(('   name' + '   ' + 'desc').green);
-        for (const key in this.app.commands) {
-            console.log(('   ' + key + '   ' + (this.app.commands[key].desc() || '-')).green)
+        for (const key in this.app.commandClasses) {
+            console.log(('   ' + key + '   ' + (this.app.commandClasses[key].desc || '-')).green)
         }
         console.log('');
     }
@@ -23,7 +23,7 @@ export default class HelpCommand extends Command {
 
         let msg;
         if (name)
-            msg = '   '+name + '不存在！';
+            msg = '   ' + name + '不存在！';
         else
             msg = '   name不能为空!';
 

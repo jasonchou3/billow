@@ -1,7 +1,7 @@
 import MakeFromTemplateCommand from './MakeFromTemplateCommand'
 
 export default class MakeControllerCommand extends MakeFromTemplateCommand {
-    name = 'make:controller';
+    static key = 'make:controller';
 
     async handle(name) {
         await this.copy(this.wrapTemplatePath('/controller.js.tmp'), this.getPath(), name + 'Controller', 'js', {

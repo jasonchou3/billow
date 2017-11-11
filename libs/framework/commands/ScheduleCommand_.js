@@ -3,7 +3,8 @@ import scheduler from '../scheduler'
 
 
 export default class ScheduleCommand extends Command {
-    name = 'schedule:run';
+    static key = 'schedule:run';
+    static desc = '执行计划任务';
 
     handle(name) {
 
@@ -12,8 +13,5 @@ export default class ScheduleCommand extends Command {
         kernel.schedule(scheduler);
     }
 
-    desc() {
-        return '执行计划任务'
-    }
 }
 

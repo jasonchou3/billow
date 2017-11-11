@@ -12,18 +12,17 @@ export default class Artisan extends Command {
 
     async handle() {
         if (process.argv.length === 2) {
-            this.app.commands['help'].handle();
+            this.app.commandHandle('help')
         } else {
             const handler_name = process.argv[2];
 
-            let command = this.app.commands[handler_name];
+            let commandClazz = this.app.commandClasses[handler_name];
 
-            if (!command) {
-                command = this.app.commands['help'];
-                command.handle(handler_name);
+            if (!commandClazz) {
+                this.app.commandHandle('help', [handler_name])
             } else {
                 const args = process.argv.splice(3, process.argv.length);
-                command.handle(...args)
+                this.app.commandHandle(handler_name, args)
             }
         }
     }

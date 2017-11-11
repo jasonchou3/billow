@@ -8,7 +8,7 @@ export default class Kernel extends ConsoleKernel {
 
     schedule(scheduler) {
         scheduler.run('*/30 * * * * *', async () => {
-            await this.command_handle('help');
+            await this.commandHandle('help');
         })
     }
 }

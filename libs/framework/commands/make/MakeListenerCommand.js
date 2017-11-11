@@ -1,7 +1,7 @@
 import MakeFromTemplateCommand from './MakeFromTemplateCommand'
 
 export default class MakeListenerCommand extends MakeFromTemplateCommand {
-    name = 'make:listener';
+    static key = 'make:listener';
 
     async handle(name) {
         await this.copy(this.wrapTemplatePath('/listener.js.tmp'), this.getPath(), name + 'Listener', 'js', {

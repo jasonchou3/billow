@@ -2,13 +2,10 @@ import Context from '../Context'
 
 export default class Command extends Context {
 
-    name;
+    //static name;
+    static desc = '-';
 
     handle() {
 
-    }
-
-    desc() {
-        return '-';
     }
 }

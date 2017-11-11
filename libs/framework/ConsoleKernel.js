@@ -23,12 +23,11 @@ export default class ConsoleKernel extends Service {
         super();
 
         (this._commands.concat(this.commands)).map(command_clazz => {
-            const command = new command_clazz();
-            this.app.registerCommand(command)
+            this.app.registerCommand(command_clazz)
         })
     }
 
-    async command_handle(name, args) {
-        await this.app.command_handle(name, args)
+    commandHandle(name, args) {
+        return this.app.commandHandle(name, args)
     }
 }
