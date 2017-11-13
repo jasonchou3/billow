@@ -12,7 +12,7 @@ export default class AppProvider extends Provider {
         //路由
 
         if (this.app.isHttpMode()) {
-            this.app.make('http');
+            this.app.make('http_kernel');
         }
     }
 

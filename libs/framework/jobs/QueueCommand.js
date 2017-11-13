@@ -12,11 +12,13 @@ export default class QueueCommand extends Command {
         const queueServer = this.app.get('queue_manager');
         const queue = queueServer.getQueue(channel);
 
+        this.app.make('queue_kernel');
+
         while (true) {
             try {
                 await queue.subscribe();
             } catch (e) {
-                this.app.get('queue').onError(e)
+                this.app.get('queue_kernel').onError(e)
             }
         }
     }

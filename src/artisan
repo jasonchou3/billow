@@ -6,7 +6,7 @@ import Artisan from '../libs/framework/Artisan'
         const artisan = new Artisan();
         const app = await artisan.init(__dirname, 'console');
         try {
-            app.make('console');
+            app.make('console_kernel');
 
             await artisan.handle();
         } catch (e) {

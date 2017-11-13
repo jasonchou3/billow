@@ -6,7 +6,7 @@ import Application from '../libs/framework/Application'
         try {
             await app.init();
 
-            app.get('http').listen();
+            app.get('http_kernel').listen();
         } catch (e) {
             app.destroy();
             console.log(e)
