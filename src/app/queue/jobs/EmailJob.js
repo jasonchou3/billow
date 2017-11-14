@@ -14,9 +14,11 @@ export default class EmailJob extends Job {
     }
 
     handle() {
-        a()
+        // a()
 
         console.log(this.data.title)
+
+        // this.error({name: 'zzz'})
 
         return new Promise((resolve) => {
             setTimeout(resolve, 2000)

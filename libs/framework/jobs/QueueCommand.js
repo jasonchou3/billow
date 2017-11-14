@@ -14,13 +14,7 @@ export default class QueueCommand extends Command {
 
         this.app.make('queue_kernel');
 
-        while (true) {
-            try {
-                await queue.subscribe();
-            } catch (e) {
-                await this.app.get('queue_kernel').onError(e)
-            }
-        }
+        await queue.subscribe();
     }
 
 }

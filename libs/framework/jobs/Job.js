@@ -23,6 +23,15 @@ export default class Job extends Context {
     }
 
     /**
+     * crash中断执行
+     */
+    error(jobData = {}) {
+        const e = new Error('job error');
+        e.job_data = jobData;
+        throw e
+    }
+
+    /**
      * 使用init创建Job
      * @returns {Job}
      */
