@@ -1,12 +1,6 @@
-import Redis from '../../libs/framework/services/Redis'
-import Queue from '../../libs/framework/jobs/Queue'
-import Mongo from '../../libs/framework/services/Mongo'
-import AppProvider from '../providers/AppProvider'
-import EventProvider from '../providers/EventsProvider'
-import ConsoleKernel from '../app/console/Kernel'
-import HttpKernel from '../app/http/Kernel'
-import QueueKernel from '../app/queue/Kernel'
-
+/**
+ * 根目录为 bootstrap.js所在目录
+ */
 export default {
 
     app_name: 'billow',
@@ -14,16 +8,16 @@ export default {
     debug: true,
 
     providers: [
-        AppProvider,
-        EventProvider,
+        './providers/AppProvider',
+        './providers/EventsProvider',
     ],
 
     alias: {
-        db: Mongo,
-        redis: Redis,
-        queue_manager: Queue,
-        console_kernel: ConsoleKernel,
-        http_kernel: HttpKernel,
-        queue_kernel: QueueKernel,
+        db: '../libs/framework/services/Mongo',
+        redis: '../libs/framework/services/Redis',
+        queue_manager: '../libs/framework/jobs/Queue',
+        console_kernel: './app/console/Kernel',
+        http_kernel: './app/http/Kernel',
+        queue_kernel: './app/queue/Kernel',
     }
 }

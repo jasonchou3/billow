@@ -7,7 +7,11 @@ import Application from '../libs/framework/Application'
 
         app.get('http_kernel').listen();
     } catch (e) {
-        app.destroy();
-        console.log(e)
+        try {
+            app.destroy();
+            console.log(e)
+        } catch (e) {
+            console.log(e)
+        }
     }
 })();

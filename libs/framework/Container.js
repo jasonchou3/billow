@@ -29,6 +29,10 @@ export default class Container {
 
     async initProviders() {
         this.config['app']['providers'].map(provider_clazz => {
+            if (typeof(provider_clazz) === 'string') {
+                provider_clazz = require(this.project_root_path + '/' + provider_clazz).default
+            }
+
             const provider = new provider_clazz();
             this.providers.push(provider);
 

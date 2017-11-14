@@ -6,7 +6,7 @@ export default class Broker extends Context {
         super();
 
         this.config = config;
-        this.channel = config.broker + '_' + config.name;
+        this.channel = this.app.config['app'].app_name + '_' + config.broker + '_' + config.name;
     }
 
     serialize(job) {

@@ -31,7 +31,11 @@ export default (Super) => class ServiceContainer extends Super {
     }
 
     make(alias, args = []) {
-        const clazz = this.config['app']['alias'][alias];
+        let clazz = this.config['app']['alias'][alias];
+        if (typeof(clazz) === 'string') {
+            clazz = require(this.project_root_path + '/' + clazz).default
+        }
+
         const instance = new clazz(...args);
 
         if (instance.lifecycle === 'app')

@@ -17,7 +17,8 @@ export default class HttpKernel extends Kernel {
         this.http.use(async (ctx, next) => {
             try {
                 await next();
-                await this.onNotFound(ctx);
+                if (!ctx.body)
+                    await this.onNotFound(ctx);
             } catch (e) {
                 await this.onError(ctx, e);
             }
@@ -44,15 +45,17 @@ export default class HttpKernel extends Kernel {
     }
 
 
-    setupRouter(prefix, routesFn, name = null) {
+    setupRouter(prefix, middlewares = [], routesFn, name = null) {
         const router = new Router({prefix: '/' + prefix});
         if (!name)
             name = prefix;
 
-        router.router.use(async (ctx, next) => {
+        middlewares.splice(0, 0, async (ctx, next) => {
             ctx['router_name'] = name;
             await next()
         });
+
+        router.router.use(middlewares);
 
         routesFn(router);
         this.http.use(router.router.routes());

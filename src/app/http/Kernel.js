@@ -20,13 +20,12 @@ export default class Kernel extends HttpKernel {
         this.http.use(convert.compose(middlewares));
 
 
-        this.setupRouter('api', api_routes);
-        // this.setupRouter('web', web_routes);
+        this.setupRouter('api', [], api_routes);
+        // this.setupRouter('web',[], web_routes);
     }
 
     async onNotFound(ctx) {
-        if (!ctx.body)
-            ctx.body = {code: 404, msg: 'Not Found'};
+        ctx.body = {code: 404, msg: 'Not Found'};
     }
 
     async onError(ctx, e) {
@@ -42,4 +41,3 @@ export default class Kernel extends HttpKernel {
         ctx.body = res;
     }
 }
-

@@ -8,7 +8,6 @@ export default class Kernel extends QueueKernel {
     ];
 
     async onError(e) {
-
-        console.log('1241231', e)
+        const {message, context, channel, job_data} = e;
     }
 }
