@@ -7,16 +7,15 @@ export default class ScheduleCommand extends Command {
     static desc = '执行计划任务';
 
     async handle(name) {
-        const kernel = this.app.get('console');
+        const kernel = this.app.get('console_kernel');
         try {
-            kernel.schedule(this);
+            await kernel.schedule(this);
         } catch (e) {
             await kernel.onError(e)
         }
     }
 
     async run(date, cb) {
-
         const nowDate = new Date();
         const options = {
             currentDate: nowDate,

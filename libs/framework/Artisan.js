@@ -4,7 +4,7 @@ import Command from './commands/Command'
 export default class Artisan extends Command {
 
     async init(path) {
-        const app = new Application(path);
+        const app = new Application(path, 'console_mode');
         await app.init();
 
         return app;

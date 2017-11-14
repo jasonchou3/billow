@@ -9,8 +9,8 @@ export default class QueueCommand extends Command {
         if (!channel)
             channel = 'default';
 
-        const queueServer = this.app.get('queue_manager');
-        const queue = queueServer.getQueue(channel);
+        const queueManager = this.app.get('queue_manager');
+        const queue = queueManager.getQueue(channel);
 
         this.app.make('queue_kernel');
 
@@ -18,7 +18,7 @@ export default class QueueCommand extends Command {
             try {
                 await queue.subscribe();
             } catch (e) {
-                this.app.get('queue_kernel').onError(e)
+                await this.app.get('queue_kernel').onError(e)
             }
         }
     }

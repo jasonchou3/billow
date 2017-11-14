@@ -8,10 +8,10 @@ export default class Container {
 
     constructor(project_root_path) {
         this.project_root_path = project_root_path;
-        this.initConfig();
     }
 
     async init() {
+        await this.initConfig();
         await this.initProviders();
     }
 

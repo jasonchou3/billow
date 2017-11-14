@@ -1,5 +1,6 @@
 import Controller from '../../../../libs/framework/controllers/Controller'
 import EmailJob from '../../queue/jobs/EmailJob'
+import inject from '../../../../libs/framework/decorators/inject'
 
 export default class UserController extends Controller {
     handle() {
@@ -15,10 +16,11 @@ export default class UserController extends Controller {
     }
 
 
-    async index(ctx) {
+    @inject('redis')
+    async index([cache], ctx) {
 
         // throw new Error(14211)
-        await this.app.get('redis').getClient().setAsync('name', 'zw');
+        await cache.getClient().setAsync('name', 'xxxxx');
         this.app.event_fire('example-event', 1, 2, 2, 2);
 
         EmailJob.init('hello!', 'hahaha').dispatch();

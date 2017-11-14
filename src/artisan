@@ -1,10 +1,10 @@
 import Artisan from '../libs/framework/Artisan'
 
 (async () => {
-    try {
+    const artisan = new Artisan();
 
-        const artisan = new Artisan();
-        const app = await artisan.init(__dirname, 'console');
+    try {
+        const app = await artisan.init(__dirname);
         try {
             app.make('console_kernel');
 

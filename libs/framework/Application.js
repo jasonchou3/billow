@@ -17,7 +17,7 @@ class Application extends Container {
     }
 
     isHttpMode() {
-        return this.appMode === 'http'
+        return this.appMode === 'http_mode'
     }
 
     get modelPath() {
