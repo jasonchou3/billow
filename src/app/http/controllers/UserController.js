@@ -7,23 +7,14 @@ export default class UserController extends Controller {
 
     }
 
-    // get(ctx) {
-    //     ctx.body = 'ahaha'
-    // }
+    @inject('redis')                                      //依赖注入
+    async get([cache], ctx) {
 
-    post(ctx) {
-        ctx.body = 'ahaha'
-    }
-
-
-    @inject('redis')
-    async index([cache], ctx) {
-
-        // throw new Error(14211)
+        // throw new Error(14211)                         //错误收集
         await cache.getClient().setAsync('name', 'xxxxx');
-        this.app.event_fire('example-event', 1, 2, 2, 2);
+        this.event_fire('order-success', {userId: 1111}); //消息机制解耦
 
-        EmailJob.init('hello!', 'hahaha').dispatch();
-        ctx.body = 'index'
+        EmailJob.init('hello!', '购买成功！').dispatch();      //队列任务
+        ctx.body = 'index'                                 //koa api
     }
 }
