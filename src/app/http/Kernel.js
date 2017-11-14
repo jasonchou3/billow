@@ -3,7 +3,7 @@ const convert = require('koa-convert');
 const bodyparser = require('koa-bodyparser')();
 const logger = require('koa-logger')();
 
-import HttpKernel from '../../../libs/framework/HttpKernel'
+import HttpKernel from '../../../libs/framework/http/HttpKernel'
 
 import api_routes from './routes/api'
 import web_routes from './routes/web'

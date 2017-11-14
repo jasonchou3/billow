@@ -1,5 +1,5 @@
 import Application from './Application'
-import Command from './commands/Command'
+import Command from './console/commands/Command'
 
 export default class Artisan extends Command {
 

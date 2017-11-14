@@ -1,4 +1,4 @@
-import Listener from '../../libs/framework/listeners/Listener'
+import Listener from '../../../libs/framework/listeners/Listener'
 
 export default class $name$Listener extends Listener {
     handle(name, args) {

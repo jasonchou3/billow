@@ -1,4 +1,4 @@
-import Controller from '../../../../libs/framework/controllers/Controller'
+import Controller from './Controller'
 
 export default class $name$Controller extends Controller {
     handle(ctx) {

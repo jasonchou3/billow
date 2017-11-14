@@ -1,4 +1,4 @@
-import Command from '../../libs/framework/commands/Command'
+import Command from '../../../../libs/framework/console/commands/Command'
 
 export default class $name$Command extends Command {
     static key = '$key$';

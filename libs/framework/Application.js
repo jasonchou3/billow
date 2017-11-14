@@ -1,6 +1,6 @@
 import Context from './Context'
 import Container from './Container'
-import CommandContainer from './commands/CommandContainer'
+import CommandContainer from './console/commands/CommandContainer'
 import ListenerContainer from './listeners/ListenerContainer'
 import ServiceContainer from './services/ServiceContainer'
 import JobsContainer from './jobs/JobsContainer'

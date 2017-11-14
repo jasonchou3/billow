@@ -1,4 +1,4 @@
-import Command from '../commands/Command'
+import Command from '../console/commands/Command'
 import QueueNotFoundException from "./exceptions/QueueNotFoundException";
 
 export default class QueueCommand extends Command {

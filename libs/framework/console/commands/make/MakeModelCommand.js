@@ -4,7 +4,7 @@ export default class MakeModelCommand extends MakeFromTemplateCommand {
     static key = 'make:model';
 
     async handle(name) {
-        await this.copy(this.wrapTemplatePath('/model.js.tmp'), this.getPath(), name, 'js', {name})
+        await this.copy(this.getTemplatePath('/model.js.tmp'), this.getPath(), name, 'js', {name})
     }
 
     getPath() {

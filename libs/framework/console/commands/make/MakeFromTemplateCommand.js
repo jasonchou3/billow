@@ -1,6 +1,6 @@
 import Command from '../Command'
-import fs from '../../libs/async-fs'
-import {replaceAll} from '../../libs/js-extensions'
+import fs from '../../../libs/async-fs'
+import {replaceAll} from '../../../libs/js-extensions'
 
 export default class MakeFromTemplateCommand extends Command {
 
@@ -14,7 +14,11 @@ export default class MakeFromTemplateCommand extends Command {
         await fs.writeFile(to_path + '/' + name + '.' + postfix, content);
     }
 
-    wrapTemplatePath(path) {
+    // wrapTemplatePath(path) {
+    //     return __dirname + path;
+    // }
+
+    getTemplatePath(path){
         return __dirname + path;
     }
 

@@ -4,7 +4,7 @@ export default class MakeCommandCommand extends MakeFromTemplateCommand {
     static key = 'make:command';
 
     async handle(name) {
-        await this.copy(this.wrapTemplatePath('/command.js.tmp'), this.getPath(), name + 'Command', 'js', {
+        await this.copy(this.getTemplatePath('/command.js.tmp'), this.getPath(), name + 'Command', 'js', {
             name,
             key: name.toLowerCase()
         })

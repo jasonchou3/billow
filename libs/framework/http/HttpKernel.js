@@ -1,5 +1,5 @@
-import Kernel from './Kernel'
-import Router from './libs/KoaRouterWrapper'
+import Kernel from '../Kernel'
+import Router from './KoaRouterWrapper'
 
 const https = require('https');
 const Koa = require('koa');

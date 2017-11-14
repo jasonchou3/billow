@@ -1,11 +1,11 @@
-import Kernel from './Kernel'
+import Kernel from '../Kernel'
 import HelperCommand from './commands/HelpCommand'
 import MakeModelCommand from './commands/make/MakeModelCommand'
-import MakeControllerCommand from './commands/make/MakeControllerCommand'
+import MakeControllerCommand from '../controllers/MakeControllerCommand'
 import MakeCommandCommand from './commands/make/MakeCommandCommand'
-import MakeListenerCommand from './commands/make/MakeListenerCommand'
-import ScheduleCommand from './commands/ScheduleCommand_'
-import QueueCommand from './jobs/QueueCommand'
+import MakeListenerCommand from '../listeners/MakeListenerCommand'
+import ScheduleCommand from './commands/ScheduleCommand'
+import QueueCommand from '../jobs/QueueCommand'
 
 export default class ConsoleKernel extends Kernel {
     lifecycle = 'app';
