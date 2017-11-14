@@ -9,6 +9,8 @@ import QueueKernel from '../app/queue/Kernel'
 
 export default {
 
+    app_name: 'billow',
+
     debug: true,
 
     providers: [
