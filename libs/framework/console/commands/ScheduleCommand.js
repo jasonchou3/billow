@@ -7,7 +7,7 @@ export default class ScheduleCommand extends Command {
     static desc = '执行计划任务';
 
     async handle(name) {
-        const kernel = this.app.get('console_kernel');
+        const kernel = this.app.service('console_kernel');
         try {
             await kernel.schedule(this);
         } catch (e) {

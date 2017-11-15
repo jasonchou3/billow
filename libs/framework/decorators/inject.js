@@ -7,7 +7,7 @@ export default (...serviceAliases) => {
         descriptor.value = (...args) => {
             const service = [];
             serviceAliases.map(serviceAlias => {
-                service.push(Context.app.get(serviceAlias))
+                service.push(Context.app.service(serviceAlias))
             });
 
             args.splice(0, 0, service);

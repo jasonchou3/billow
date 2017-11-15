@@ -8,7 +8,7 @@ export default (Super) => class ServiceContainer extends Super {
      * @param alias
      * @param args array
      */
-    get(alias, args = []) {
+    service(alias, args = []) {
         if (!this.alias_instances[alias]) {
 
             return this.make(alias, args);
@@ -22,7 +22,7 @@ export default (Super) => class ServiceContainer extends Super {
      * @param alias
      * @returns {*}
      */
-    has(alias) {
+    hasService(alias) {
         return this.alias_instances[alias];
     }
 

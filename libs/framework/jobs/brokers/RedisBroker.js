@@ -15,7 +15,7 @@ export default class RedisBroker extends Broker {
 
 
     getClient() {
-        return this.app.get('redis').getClient(this.config.connection);
+        return this.app.service('redis').getClient(this.config.connection);
     }
 
 }

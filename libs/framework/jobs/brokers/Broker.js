@@ -28,7 +28,7 @@ export default class Broker extends Context {
         } catch (e) {
             e.context = jsonStr;
             e.channel = channel;
-            await this.app.get('queue_kernel').onError(e)
+            await this.app.service('queue_kernel').onError(e)
         }
     }
 }

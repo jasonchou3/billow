@@ -4,6 +4,7 @@ const bodyparser = require('koa-bodyparser')();
 const logger = require('koa-logger')();
 
 import HttpKernel from '../../../libs/framework/http/HttpKernel'
+import auth from '../../../libs/framework/auth/middlewares/auth'
 
 import api_routes from './routes/api'
 import web_routes from './routes/web'
@@ -14,7 +15,8 @@ export default class Kernel extends HttpKernel {
         const middlewares = [
             favicon, //拦截fav请求
             bodyparser,
-            logger
+            logger,
+            auth
         ];
 
         this.http.use(convert.compose(middlewares));

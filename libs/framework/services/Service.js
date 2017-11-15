@@ -2,7 +2,7 @@ import Context from '../Context'
 
 
 export default class Service extends Context {
-    config_key;
+    // config_key;
 
     /**
      *

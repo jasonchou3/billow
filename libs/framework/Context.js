@@ -9,4 +9,8 @@ export default class Context {
     event_fire(event_name, args) {
         this.app.event_fire(event_name, args)
     }
+
+    service() {
+        this.app.service(...arguments)
+    }
 }

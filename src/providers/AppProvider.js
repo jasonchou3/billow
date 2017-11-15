@@ -18,10 +18,10 @@ export default class AppProvider extends Provider {
 
 
     destroy() {
-        this.app.get('db').destroy();
+        this.app.service('db').destroy();
 
-        if (this.app.has('redis')) {
-            this.app.get('redis').destroy();
+        if (this.app.hasService('redis')) {
+            this.app.service('redis').destroy();
         }
     }
 }

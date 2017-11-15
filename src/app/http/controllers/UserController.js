@@ -9,7 +9,7 @@ export default class UserController extends Controller {
 
     @inject('redis')                                      //依赖注入
     async get([cache], ctx) {
-
+        await ctx.getAuth().authenticate('zhou', 'asdfs');
         // throw new Error(14211)                         //错误收集
         await cache.getClient().setAsync('name', 'xxxxx');
         this.event_fire('order-success', {userId: 1111}); //消息机制解耦

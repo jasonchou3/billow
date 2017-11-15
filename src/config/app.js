@@ -15,6 +15,7 @@ export default {
     alias: {
         db: '../libs/framework/services/Mongo',
         redis: '../libs/framework/services/Redis',
+        auth: '../libs/framework/auth/Auth',
         queue_manager: '../libs/framework/jobs/Queue',
         console_kernel: './app/console/Kernel',
         http_kernel: './app/http/Kernel',

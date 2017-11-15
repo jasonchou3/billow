@@ -19,7 +19,7 @@ export default class Job extends Context {
     }
 
     dispatch() {
-        this.app.get('queue_manager').dispatch(this);
+        this.app.service('queue_manager').dispatch(this);
     }
 
     /**
