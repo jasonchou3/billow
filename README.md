@@ -1,5 +1,10 @@
 # Billow，浪的很！
 
+| 项目 | 版本 | 描述 |
+|---------|--------|-------------|
+|billow-js|![npm version](https://badge.fury.io/js/billow-js.svg)|框架源码|
+|billow-cli|![npm version](https://badge.fury.io/js/billow-cli.svg)|命令行工具|
+
 ## 介绍
 
 Billow借鉴了php优秀框架laravel的很多理念，目的是让开发者可以用nodejs写出更加优秀的后端服务。框架以IOC为核心，提供了自定义命令行交互指令，多broker的队列任务，基于cron的调度任务，基于Koa的web服务，以及完善的crash捕捉处理，覆盖后端开发每个场景，提高代码复用率，维护性，可测试性！如果Billow有不足地方，或者你有更好的想法，欢迎提交ISSUE或者PR。
