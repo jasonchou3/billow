@@ -1,4 +1,4 @@
-import Provider from '../../libs/framework/providers/Provider'
+import Provider from '../../framework/src/providers/Provider'
 
 export default class AppProvider extends Provider {
 

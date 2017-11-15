@@ -1,4 +1,4 @@
-import Job from '../../../../libs/framework/jobs/Job'
+import Job from '../../../../framework/src/jobs/Job'
 
 export default class EmailJob extends Job {
     static key = 'send_email';

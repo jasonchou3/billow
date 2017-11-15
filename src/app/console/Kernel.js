@@ -1,4 +1,4 @@
-import ConsoleKernel from '../../../libs/framework/console/ConsoleKernel'
+import ConsoleKernel from '../../../framework/src/console/ConsoleKernel'
 import ExampleCommand from './commands/ExampleCommand'
 
 export default class Kernel extends ConsoleKernel {

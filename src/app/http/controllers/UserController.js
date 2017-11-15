@@ -1,6 +1,6 @@
-import Controller from '../../../../libs/framework/controllers/Controller'
+import Controller from '../../../../framework/src/controllers/Controller'
 import EmailJob from '../../queue/jobs/EmailJob'
-import inject from '../../../../libs/framework/decorators/inject'
+import inject from '../../../../framework/src/decorators/inject'
 
 export default class UserController extends Controller {
     handle() {

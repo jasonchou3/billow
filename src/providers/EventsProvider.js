@@ -1,4 +1,4 @@
-import Provider from '../../libs/framework/providers/EventsProvider'
+import Provider from '../../framework/src/providers/EventsProvider'
 
 export default class EventsProvider extends Provider {
     listeners = {

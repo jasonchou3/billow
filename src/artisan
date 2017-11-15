@@ -1,4 +1,4 @@
-import Artisan from '../libs/framework/Artisan'
+import Artisan from '../framework/src/Artisan'
 
 (async () => {
     const artisan = new Artisan();

@@ -1,4 +1,4 @@
-import Application from '../libs/framework/Application'
+import Application from '../framework/src/Application'
 
 (async () => {
     const app = new Application(__dirname, 'http_mode');
