@@ -33,7 +33,10 @@ export default (Super) => class ServiceContainer extends Super {
     make(alias, args = []) {
         let clazz = this.config['app']['alias'][alias];
         if (typeof(clazz) === 'string') {
-            clazz = require(this.project_root_path + '/' + clazz).default
+            if (clazz.startsWith('billow-js'))
+                clazz = require(clazz).default;
+            else
+                clazz = require(this.project_root_path + '/' + clazz).default
         }
 
         const instance = new clazz(...args);

@@ -1,8 +1,11 @@
 {
   "name": "billow-cli",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "",
-  "main": "index.js",
+  "main": "bin/billow-cli.js",
+  "bin": {
+    "billow-cli": "bin/billow-cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "node ./prepublish.js"
