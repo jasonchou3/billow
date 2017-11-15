@@ -18,6 +18,11 @@ Billow借鉴了php优秀框架laravel的很多理念，目的是让开发者可�
 * 支持https
 * ...
 
+## 快速开始
+	npm install billow-cli -g
+	
+	billow-cli new newproject
+
 ## 目录介绍
 	dist					//babel编译生成目录
 		
