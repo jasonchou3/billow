@@ -61,22 +61,4 @@ typings/
 
 
 .idea
-dist
 /test.js
-Application.js
-Artisan.js
-Container.js
-Context.js
-Kernel.js
-auth/
-console/
-controllers/
-decorators/
-global.js
-http/
-jobs/
-libs/
-listeners/
-package-lock.json
-providers/
-services/
