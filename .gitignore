@@ -62,3 +62,5 @@ typings/
 
 .idea
 /test.js
+
+.DS_Store
