@@ -1,16 +1,24 @@
 import Service from './Service'
 
-const redis = require('redis');
-const bluebird = require("bluebird");
-
-bluebird.promisifyAll(redis.RedisClient.prototype);
-bluebird.promisifyAll(redis.Multi.prototype);
-
 export default class Redis extends Service {
     lifecycle = 'app';
     config_key = 'redis';
 
     connectionPool = {};
+
+    constructor() {
+        super(...arguments);
+
+        try {
+            this.redis = require('redis');
+            const bluebird = require("bluebird");
+
+            bluebird.promisifyAll(this.redis.RedisClient.prototype);
+            bluebird.promisifyAll(this.redis.Multi.prototype);
+        } catch (e) {
+            throw new Error(`请先安装redis依赖：npm install redis bluebird！`);
+        }
+    }
 
     getClient(connection_name = null) {
         if (!connection_name)
@@ -31,7 +39,7 @@ export default class Redis extends Service {
 
         const conKey = this.getConnectionKey(connection_config);
         if (!this.connectionPool[conKey]) {
-            const client = redis.createClient(connection_config);
+            const client = this.redis.createClient(connection_config);
             client.on("error", function (err) {
                 console.log("Error " + err);
             });

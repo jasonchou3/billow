@@ -10,7 +10,6 @@ export default class MemoryBroker extends Broker {
         this.handle(this.channel, this.serialize(job));
     }
 
-
     subscribe() {
         console.log('memory queue跟调用者在同一进程，无需额外运行！')
     }

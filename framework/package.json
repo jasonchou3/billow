@@ -13,7 +13,6 @@
   "license": "MIT",
   "homepage": "https://github.com/jasonchou3/billow",
   "dependencies": {
-    "bluebird": "^3.5.1",
     "colors": "^1.1.2",
     "cron-parser": "^2.4.3",
     "koa": "^2.4.1",
@@ -22,8 +21,7 @@
     "koa-favicon": "^2.0.0",
     "koa-logger": "^3.1.0",
     "koa-router": "^7.3.0",
-    "mongoose": "^4.13.2",
-    "redis": "^2.8.0"
+    "mongoose": "^4.13.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
