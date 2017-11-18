@@ -5,10 +5,11 @@ export default class Service extends Context {
     // config_key;
 
     /**
-     *
-     * @type {string} manual 手动管理|app 应用全局|request 请求
+     * 是否是单例
+     * @type {boolean}
      */
-    lifecycle = 'manual';
+    // single = false;
+
 
     get config() {
         return this.app.config[this.config_key];
@@ -17,4 +18,5 @@ export default class Service extends Context {
     destroy() {
 
     }
+
 }

@@ -3,7 +3,7 @@ import Service from './Service'
 const mongoose = require('mongoose');
 
 export default class Mongo extends Service {
-    lifecycle = 'app';
+    single = true;
     config_key = 'db';
 
     constructor(connection_key = null) {

@@ -8,7 +8,7 @@ const driverMap = {
 };
 
 export default class CacheManager extends Service {
-    lifecycle = 'app';
+    single = true;
     config_key = 'cache';
 
     clients = {};

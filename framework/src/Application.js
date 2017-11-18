@@ -13,7 +13,13 @@ class Application extends Container {
         super(project_root_path);
 
         Context.app = this;
-        this.appMode = mode
+        this.appMode = mode;
+    }
+
+    async init() {
+        await this.initConfig();
+        await this.initAliases();
+        await this.initProviders();
     }
 
     isHttpMode() {

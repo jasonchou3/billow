@@ -1,7 +1,7 @@
 import Service from './Service'
 
 export default class Redis extends Service {
-    lifecycle = 'app';
+    single = true;
     config_key = 'redis';
 
     connectionPool = {};

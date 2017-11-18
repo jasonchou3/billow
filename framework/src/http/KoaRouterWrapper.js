@@ -10,7 +10,7 @@ export default class KoaRouterWrapper extends Context {
 
     use() {
         let controllerPath = arguments[arguments.length - 1];
-        const controllerClazz = require(this.app.controllerPath + '/' + controllerPath).default;
+        const controllerClazz = require(this.app.controllerPath + '/' + controllerPath.split('@')[0]).default;
 
         ['get', 'post', 'put', 'delete'].map(method => {
             if (controllerClazz.prototype[method]) {

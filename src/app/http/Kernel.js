@@ -27,19 +27,31 @@ export default class Kernel extends HttpKernel {
     }
 
     async onNotFound(ctx) {
-        ctx.body = {code: 404, msg: 'Not Found'};
+        ctx.body = {status: 404, msg: 'Not Found'};
     }
 
     async onError(ctx, e) {
-        const res = {code: 500, msg: 'Internal Server Error'};
 
-        if (this.app.debug) {
-            res.debug = true;
-            res.router_name = ctx.router_name;
-            res.msg = e.message;
-            res.stack = e.stackList()
+        if (ctx.routerName === 'api') {
+            let status, msg;
+            if (e.name === 'authenticate_failed') {
+                status = 401;
+                msg = 'Unauthorized';
+            } else {
+                status = 500;
+                msg = 'Internal Server Error';
+            }
+
+            const res = {status, msg};
+
+            if (this.app.debug) {
+                res.debug = true;
+                res.routerName = ctx.routerName;
+                res.stack = e.stackList()
+            }
+
+            ctx.status = status;
+            ctx.body = res;
         }
-
-        ctx.body = res;
     }
 }

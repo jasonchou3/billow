@@ -1,7 +1,7 @@
 import Kernel from '../Kernel'
 
 export default class QueueKernel extends Kernel {
-    lifecycle = 'app';
+    single = true;
 
     constructor() {
         super();

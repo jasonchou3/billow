@@ -10,11 +10,6 @@ export default class Container {
         this.project_root_path = project_root_path;
     }
 
-    async init() {
-        await this.initConfig();
-        await this.initProviders();
-    }
-
     async initConfig() {
         readFileFromDir(this.configPath, (key, filename) => {
             this.config[key] = require(filename).default;
@@ -28,12 +23,14 @@ export default class Container {
     }
 
     async initProviders() {
-        this.config['app']['providers'].map(provider_clazz => {
-            if (typeof(provider_clazz) === 'string') {
-                provider_clazz = require(this.project_root_path + '/' + provider_clazz).default
-            }
+        this.config['app']['providers'].map(providerClassPath => {
+            let providerClass;
+            if (typeof(providerClassPath) === 'string') {
+                providerClass = this.requireClassFromConfig(providerClassPath);
+            } else
+                providerClass = providerClassPath;
 
-            const provider = new provider_clazz();
+            const provider = new providerClass();
             this.providers.push(provider);
 
             provider.init();
@@ -43,6 +40,18 @@ export default class Container {
             provider.boot();
         })
 
+    }
+
+    requireClassFromConfig(classPath) {
+        let clazz;
+        if (classPath.startsWith('billow-js'))
+            clazz = require(classPath).default;
+        if (classPath.startsWith('/'))
+            clazz = require(classPath).default;
+        else
+            clazz = require(this.configPath + '/' + classPath).default
+
+        return clazz;
     }
 
     destroy() {

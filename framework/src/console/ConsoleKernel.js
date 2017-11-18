@@ -8,7 +8,7 @@ import ScheduleCommand from './commands/ScheduleCommand'
 import QueueCommand from '../queue/QueueCommand'
 
 export default class ConsoleKernel extends Kernel {
-    lifecycle = 'app';
+    single = true;
 
     commands = [];
     _commands = [

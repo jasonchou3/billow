@@ -1,7 +1,16 @@
 export default (Super) => class ServiceContainer extends Super {
-    // ==================== service =========================
 
-    alias_instances = {};
+    serviceSingleInstances = {}; //key : alias, value : serviceInstance
+
+    aliasMap = {}; //key : alias , value : ServiceClass
+
+    aliasImplementationMap = {}; //key : alias , value : ServiceClass
+
+    initAliases() {
+        for (let [alias, ServiceClass] of Object.entries(this.config['app']['alias'])) {
+            this.registerAlias(alias, ServiceClass);
+        }
+    }
 
     /**
      * 不存在创建，存在返回服务对象
@@ -9,12 +18,12 @@ export default (Super) => class ServiceContainer extends Super {
      * @param args array
      */
     service(alias, args = []) {
-        if (!this.alias_instances[alias]) {
+        if (!this.serviceSingleInstances[alias]) {
 
             return this.make(alias, args);
         }
 
-        return this.alias_instances[alias];
+        return this.serviceSingleInstances[alias];
     }
 
     /**
@@ -23,35 +32,65 @@ export default (Super) => class ServiceContainer extends Super {
      * @returns {*}
      */
     hasService(alias) {
-        return this.alias_instances[alias];
+        return this.serviceSingleInstances[alias];
     }
 
     hasAlias(alias) {
-        return !!this.config['app']['alias'][alias];
+        return !!this.aliasMap[alias];
     }
 
     make(alias, args = []) {
-        let clazz = this.config['app']['alias'][alias];
-        if (typeof(clazz) === 'string') {
-            if (clazz.startsWith('billow-js'))
-                clazz = require(clazz).default;
-            else
-                clazz = require(this.project_root_path + '/' + clazz).default
-        }
+        let serviceClassPath = this.aliasMap[alias];
+        let serviceClass;
+        if (typeof(serviceClassPath) === 'string') {
+            serviceClass = this.requireClassFromConfig(serviceClassPath);
+        } else
+            serviceClass = serviceClassPath;
 
-        const instance = new clazz(...args);
+        const instance = new serviceClass(...args);
 
-        if (instance.lifecycle === 'app')
-            this.alias_instances[alias] = instance;
-        // else if (instance.lifecycle === 'request')
+        if (instance.single)
+            this.serviceSingleInstances[alias] = instance;
 
         return instance;
     }
 
-    registerAlias(alias, clazz) {
-        if (this.config['app']['alias'][alias])
-            throw new Error(`alias:${alias}已存在！`);
-
-        this.config['app']['alias'][alias] = clazz;
+    /**
+     * 为一个服务注册别名
+     * @param alias
+     * @param ServiceClass
+     */
+    registerAlias(alias, ServiceClass) {
+        this.aliasMap[alias] = ServiceClass;
     }
+
+    /**
+     *
+     * @param alias
+     * @param key
+     * @param ServiceClass
+     */
+    registerAliasImplementation(alias, key, ServiceClass) {
+
+        if (!this.aliasImplementationMap[alias]) {
+            this.aliasImplementationMap[alias] = {}
+        }
+
+        this.aliasImplementationMap[alias][key] = ServiceClass;
+    }
+
+    switchAliasImplementation(alias, key) {
+        if (this.aliasImplementationMap[alias]) {
+            const ServiceClass = this.aliasImplementationMap[alias][key];
+
+            if (ServiceClass) {
+                this.registerAlias(alias, ServiceClass)
+                return
+            }
+        }
+
+        throw new Error(`没有service ${alias} 的实现 ${key}`);
+    }
+
+
 }

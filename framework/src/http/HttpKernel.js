@@ -7,7 +7,7 @@ const fs = require('fs');
 
 export default class HttpKernel extends Kernel {
     config_key = 'http';
-    lifecycle = 'app';
+    single = true;
 
     constructor() {
         super();
@@ -51,7 +51,7 @@ export default class HttpKernel extends Kernel {
             name = prefix;
 
         middlewares.splice(0, 0, async (ctx, next) => {
-            ctx['router_name'] = name;
+            ctx['routerName'] = name;
             await next()
         });
 

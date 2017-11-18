@@ -9,7 +9,7 @@ const brokerMap = {
 };
 
 export default class QueueManager extends Service {
-    lifecycle = 'app';
+    single = true;
     config_key = 'queue';
 
     queues = {};
