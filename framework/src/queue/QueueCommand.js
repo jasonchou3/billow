@@ -9,12 +9,10 @@ export default class QueueCommand extends Command {
         if (!channel)
             channel = 'default';
 
-        const queueManager = this.app.service('queue_manager');
-        const queue = queueManager.getQueue(channel);
-
+        const queueManager = this.app.service('queue');
         this.app.make('queue_kernel');
 
-        await queue.subscribe();
+        await queueManager.subscribe(channel);
     }
 
 }

@@ -11,6 +11,6 @@ export default class Context {
     }
 
     service() {
-        this.app.service(...arguments)
+        return this.app.service(...arguments)
     }
 }

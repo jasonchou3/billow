@@ -23,5 +23,9 @@ export default class AppProvider extends Provider {
         if (this.app.hasService('redis')) {
             this.app.service('redis').destroy();
         }
+
+        if (this.app.hasService('cache')) {
+            this.app.service('cache').destroy();
+        }
     }
 }

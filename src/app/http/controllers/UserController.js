@@ -7,11 +7,19 @@ export default class UserController extends Controller {
 
     }
 
-    @inject('redis')                                      //依赖注入
+    @inject('cache')                                      //依赖注入
     async get([cache], ctx) {
         await ctx.getAuth().authenticate('zhou', 'asdfs');
         // throw new Error(14211)                         //错误收集
-        await cache.getClient().setAsync('name', 'xxxxx');
+        await cache.set('name', 'xxxxx');
+
+        const value = await cache.get('name');
+
+        await cache.expire('name', 100);
+
+        console.log(await cache.ttl('name'));
+
+
         this.event_fire('order-success', {userId: 1111}); //消息机制解耦
 
         EmailJob.init('hello!', '购买成功！').dispatch();      //队列任务

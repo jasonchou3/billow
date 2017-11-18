@@ -1,7 +1,5 @@
 export default {
-
     default: 'api',
-
     connections: {
         api: {
             database: 'meidian_release',

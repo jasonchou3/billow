@@ -1,4 +1,4 @@
-import QueueKernel from '../../../framework/src/jobs/QueueKernel'
+import QueueKernel from '../../../framework/src/queue/QueueKernel'
 import EmailJob from './jobs/EmailJob'
 
 export default class Kernel extends QueueKernel {

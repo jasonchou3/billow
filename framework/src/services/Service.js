@@ -13,4 +13,8 @@ export default class Service extends Context {
     get config() {
         return this.app.config[this.config_key];
     }
+
+    destroy() {
+
+    }
 }

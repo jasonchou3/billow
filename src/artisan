@@ -5,6 +5,12 @@ import Artisan from '../framework/src/Artisan'
 
     try {
         const app = await artisan.init(__dirname);
+        process.on('SIGINT', () => {
+            console.log('billow exit!');
+            app.destroy();
+            process.exit();
+        });
+
         try {
             app.make('console_kernel');
 

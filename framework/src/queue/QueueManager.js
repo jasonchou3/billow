@@ -6,7 +6,7 @@ const brokerMap = {
     redis: RedisBroker
 };
 
-export default class Queue extends Service {
+export default class QueueManager extends Service {
     lifecycle = 'app';
     config_key = 'queue';
 
@@ -26,11 +26,11 @@ export default class Queue extends Service {
         const queue_config = this.config.channels[channelName];
 
         if (!queue_config)
-            throw new QueueNotFoundException(`配置信息不存在！`)
+            throw new QueueNotFoundException(`配置信息不存在！`);
 
         const BrokerClazz = brokerMap[queue_config.broker];
         if (!BrokerClazz)
-            throw new QueueNotFoundException(`没有对应的broker！`)
+            throw new QueueNotFoundException(`没有对应的broker！`);
 
         queue_config.name = channelName;
         queue = new BrokerClazz(queue_config);
@@ -39,4 +39,9 @@ export default class Queue extends Service {
 
         return queue;
     }
+
+    subscribe(channelName) {
+        this.getQueue(channelName).subscribe();
+    }
+
 }

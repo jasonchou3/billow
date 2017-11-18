@@ -3,7 +3,7 @@ import Container from './Container'
 import CommandContainer from './console/commands/CommandContainer'
 import ListenerContainer from './listeners/ListenerContainer'
 import ServiceContainer from './services/ServiceContainer'
-import JobsContainer from './jobs/JobsContainer'
+import JobsContainer from './queue/JobsContainer'
 import './global'
 import {mixin} from './libs/js-extensions'
 
