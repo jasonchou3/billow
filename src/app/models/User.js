@@ -7,7 +7,7 @@ const UserSchema = new Schema({
 });
 
 UserSchema.statics.authenticate = () => {
-  console.log('hahaha')
+  console.log('to authenticate')
 };
 
 const User = mongoose.model('User', UserSchema);

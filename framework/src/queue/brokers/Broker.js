@@ -31,4 +31,7 @@ export default class Broker extends Context {
             await this.app.service('queue_kernel').onError(e)
         }
     }
+
+    subscribe() {
+    }
 }

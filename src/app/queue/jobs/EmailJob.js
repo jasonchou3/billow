@@ -2,7 +2,6 @@ import Job from '../../../../framework/src/queue/Job'
 
 export default class EmailJob extends Job {
     static key = 'send_email';
-    channel = 'default';
 
     data = {
         title: null,
@@ -16,7 +15,7 @@ export default class EmailJob extends Job {
     handle() {
         // a()
 
-        console.log(this.data.title)
+        console.log('EmailJob', this.data.title)
 
         // this.error({name: 'zzz'})
 

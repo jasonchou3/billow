@@ -1,8 +1,13 @@
 export default {
+    default: 'memory',
     channels: {
-        'default': {
+        memory: {
+            broker: 'memory',
+        },
+
+        redis: {
             broker: 'redis',
             connection: 'queue'
-        }
+        },
     }
 }

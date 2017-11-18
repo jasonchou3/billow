@@ -53,7 +53,6 @@ export default class CacheManager extends Service {
 
 
     destroy() {
-        console.log('destroydestroydestroydestroy')
         Object.values(this.clients).map(client => client.destroy())
     }
 }

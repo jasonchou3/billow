@@ -6,9 +6,6 @@ export default class QueueCommand extends Command {
     static desc = '执行计划任务';
 
     async handle(channel) {
-        if (!channel)
-            channel = 'default';
-
         const queueManager = this.app.service('queue');
         this.app.make('queue_kernel');
 

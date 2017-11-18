@@ -1,9 +1,11 @@
 import Service from '../services/Service'
 import RedisBroker from './brokers/RedisBroker'
+import MemoryBroker from './brokers/MemoryBroker'
 import QueueNotFoundException from './exceptions/QueueNotFoundException'
 
 const brokerMap = {
-    redis: RedisBroker
+    redis: RedisBroker,
+    memory: MemoryBroker,
 };
 
 export default class QueueManager extends Service {
@@ -18,6 +20,9 @@ export default class QueueManager extends Service {
     }
 
     getQueue(channelName) {
+        if (!channelName)
+            channelName = this.config.default;
+
         let queue = this.queues[channelName];
 
         if (queue)
@@ -26,11 +31,11 @@ export default class QueueManager extends Service {
         const queue_config = this.config.channels[channelName];
 
         if (!queue_config)
-            throw new QueueNotFoundException(`配置信息不存在！`);
+            throw new QueueNotFoundException(`${channelName} 配置信息不存在！`);
 
         const BrokerClazz = brokerMap[queue_config.broker];
         if (!BrokerClazz)
-            throw new QueueNotFoundException(`没有对应的broker！`);
+            throw new QueueNotFoundException(`${channelName} 没有对应的broker！`);
 
         queue_config.name = channelName;
         queue = new BrokerClazz(queue_config);
