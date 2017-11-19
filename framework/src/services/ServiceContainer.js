@@ -47,6 +47,9 @@ export default (Super) => class ServiceContainer extends Super {
         } else
             serviceClass = serviceClassPath;
 
+        if (!serviceClass)
+            throw new Error(`${alias} 服务不存在！`);
+
         const instance = new serviceClass(...args);
 
         if (instance.single)

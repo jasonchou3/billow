@@ -1,15 +1,16 @@
 import Controller from '../../../../framework/src/controllers/Controller'
 import EmailJob from '../../queue/jobs/EmailJob'
-import inject from '../../../../framework/src/decorators/inject'
+import {inject, isAuthenticated} from '../../../../framework/src/decorators'
 
 export default class UserController extends Controller {
     handle() {
 
     }
 
+    @isAuthenticated()
     @inject('cache')                                      //依赖注入
     async get([cache], ctx) {
-        await ctx.getAuth().authenticate('zhou', 'asdfs');
+        await ctx.auth.authenticate('zhou', 'asdfs');
         // throw new Error(14211)                         //错误收集
         await cache.set('name', 'xxxxx');
 
@@ -24,5 +25,14 @@ export default class UserController extends Controller {
 
         EmailJob.init('hello!', '购买成功！').dispatch();      //队列任务
         ctx.body = 'index'                                 //koa api
+    }
+
+
+    async login(ctx) {
+        // await ctx.auth.authenticate('zhou', 'asdfs');
+
+        // ctx.session.user = {name: 'asad'};
+        ctx.session = null;
+        ctx.body = 'login'
     }
 }

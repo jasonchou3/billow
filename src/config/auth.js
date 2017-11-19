@@ -8,11 +8,4 @@ export default {
         }
     },
 
-    jwt: {
-        secret: '',
-        ttl: 60,
-        refresh_ttl: 20160 // 单位 min
-    },
-
-    session: {}
 }
