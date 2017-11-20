@@ -1,9 +1,9 @@
 export default {
     name: 'BILLOW_SESS_ID',
-    ttl: 60, //单位 s
+    ttl: 60 * 60, //单位 s
 
 
     prefix: 'sid_',
-    driver: 'redis',
+    driver: 'mongo',
     connection: 'session'
 }

@@ -29,6 +29,7 @@ export default class Kernel extends HttpKernel {
     }
 
     async onNotFound(ctx) {
+        ctx.status = 404;
         ctx.body = {status: 404, msg: 'Not Found'};
     }
 
