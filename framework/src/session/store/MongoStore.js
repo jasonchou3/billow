@@ -3,8 +3,6 @@ import Store from "./SessionStore";
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-console.log(mongoose.Promise)
-
 export default class MongoStore extends Store {
     async get(sessionId) {
         let session = await Session.findOne({sid: this.getKey(sessionId)});

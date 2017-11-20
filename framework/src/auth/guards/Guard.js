@@ -30,25 +30,50 @@ export default class Guard extends Context {
         return modelClass['authenticate'](...arguments)
     }
 
-    async isAuthenticated() {
-        if (!this.userId)
-            return false;
-
-        const modelClass = this.getModelClass();
-        const user = await modelClass.findById(this.userId);
-
+    async isAuthenticated(crash = true) {
+        const user = await this.getUser();
         if (user) {
             if (!user['isValid']) {
+                const modelClass = this.getModelClass();
                 throw new Error(`${this.constructor.name} 指定model: ${modelClass.modelName} 未实现 isValid 方法`);
             }
 
-            return user['isValid']();
+            const succ = user['isValid']();
+
+
+            if (succ)
+                return true;
         }
 
+        if (crash)
+            this.throwAuthenticateFailed();
         return false;
     }
 
-    // parseUserId() {
-    //需实现
-    // }
+
+    async getUser() {
+        if (this.user)
+            return this.user;
+
+        if (!this.userId) {
+            return null;
+        }
+
+        const modelClass = this.getModelClass();
+        const user = await modelClass.findById(this.userId);
+        this.user = user;
+
+        return user;
+    }
+
+    throwAuthenticateFailed() {
+        const err = new Error('authenticate failed');
+        err.name = 'authenticate_failed';
+        throw err
+    }
+
+
+    getUserId() {
+        return this.userId;
+    }
 }

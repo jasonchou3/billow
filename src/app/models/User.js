@@ -7,7 +7,11 @@ const UserSchema = new Schema({
 });
 
 UserSchema.statics.authenticate = () => {
-  console.log('to authenticate')
+    console.log('to authenticate')
+};
+
+UserSchema.methods.isValid = () => {
+    return true;
 };
 
 const User = mongoose.model('User', UserSchema);

@@ -39,7 +39,7 @@ export default class Auth extends Service {
         if (!this.guardInstances[guard_name]) {
             const guard = this.config.guards[guard_name];
 
-            this.guardInstances[guard_name] = new GuardClass(this.ctx, guard.model, this.config[guard.driver]);
+            this.guardInstances[guard_name] = new GuardClass(this.ctx, guard.model, this.app.config[guard.driver]);
         }
 
 
@@ -50,22 +50,32 @@ export default class Auth extends Service {
      * 尝试认证
      */
     authenticate() {
-        const guard = this.getGuard();
-        return guard.authenticate(...arguments);
+        return this.getGuard().authenticate(...arguments);
     }
 
-    isAuthenticated() {
-        return this.getGuard().isAuthenticated();
+    /**
+     * 是否已经认证
+     * @param crash
+     * @returns {*|Promise}
+     */
+    isAuthenticated(crash = true) {
+        return this.getGuard().isAuthenticated(crash);
     }
 
     /**
      * 登录
      */
     login(user) {
-
+        return this.getGuard().login(user);
     }
 
     getUser() {
+        return this.getGuard().getUser();
+    }
 
+    onRequestFinish() {
+        Object.values(this.guardInstances).map(guard => {
+            guard.onRequestFinish();
+        })
     }
 }
